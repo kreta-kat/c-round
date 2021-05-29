@@ -1,0 +1,143 @@
+Q1-
+#include<iostream>
+#include<math.h>
+#include<stdlib.h>
+using namespace std;
+
+void closest(int arr[], int n)
+{
+	if( n < 2)
+	{
+		cout<<"Wrong input(small size)";
+		return;
+	}
+	
+	int m1 = 0;
+	int m2 = 1;
+	int sum, minimum_sum = arr[0] + arr[1];
+	for( int i = 0; i < n-1; i++)
+	{
+		for(int j = i +1 ; j < n; j++)
+		{
+			sum = arr[i] + arr[j];
+			if(abs(minimum_sum) > abs(sum))
+			{
+				minimum_sum = sum;
+				m1 = i;
+				m2 = j;
+			}
+		}
+	}
+	
+	cout<<"The sum closest to Zero is of "<< arr[m1] << " & "<< arr[m2]<<endl;
+	
+	
+}
+int main(void)
+{
+	int n;
+	cout<<"Enter array size"<<endl;
+	cin>> n;
+	int arr[n];
+	cout<<"Enter array elements"<<endl;
+	for(int i = 0; i<n ; i++)
+	{
+		cin>> arr[i];
+	}
+	
+	closest(arr,n);
+	return 0;
+}
+---------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Q2-
+#include<iostream>
+#include<stdlib.h>
+using namespace std;
+
+void repeating_no(int A1[] , int n)
+{
+	int i;
+	cout<< "Repeating ELements : ";
+	for(i = 0; i<n ; i++)
+	{
+		if (A1[abs(A1[i])] >= 0)
+		    A1[abs(A1[i])] = -A1[abs(A1[i])];
+		    
+		else
+		cout << abs(A1[i]) << "  ";
+	}
+}
+int main(void)
+{
+	int n;
+	cout<<"Enter array size"<<endl;
+	cin>> n;
+	int arr[n];
+	cout<<"Enter array elements"<<endl;
+	for(int i = 0; i<n ; i++)
+	{
+		cin>> arr[i];
+	}
+	
+	repeating_no(arr,n);
+	return 0;
+}
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Q3-
+#include<iostream>
+using namespace std;
+
+int distance_min(int arr[], int n, int a, int b)
+{
+	int index = -1 , md = INT_MAX; 
+	
+	for(int i =0; i<n; i++)
+	{
+		if(arr[i] == a || arr[i] == b)
+		{
+			if( index != -1 && arr[i] != arr[index])
+			md = min(md, i- index);
+			
+			
+			index = i;
+		}
+	}
+	
+	if(md == INT_MAX)
+	return -1;
+	
+
+return md;
+}
+int main(void)
+{
+	int n,a,b;
+	cout<<"Enter array size"<<endl;
+	cin>> n;
+	int arr[n];
+	cout<<"Enter array elements"<<endl;
+	for(int i = 0; i<n ; i++)
+	{
+		cin>> arr[i];
+	}
+	cout<<"\nArray elements"<<endl;
+	for(int i = 0; i<n ; i++)
+	{
+		cout<< arr[i]<< " ";
+	}
+	cout<<"\nEnter elements to find minimum distance b/w them"<<endl;
+	cout << "Element 1 : ";
+	cin>>a;
+	cout << "\nElement 2 : ";
+	cin>>b;
+	int d = distance_min(arr,n,a,b);
+	cout<<endl;
+	cout<<"Minimum Distance betmeen "<<a<< " and "<<b<<" is "<<d;
+	return 0;
+}
+
