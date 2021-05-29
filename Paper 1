@@ -1,0 +1,156 @@
+Q1 -
+#include<iostream>
+#include<limits.h>
+using namespace std;
+
+void smallest_2_numbers(int arr[] , int n)
+{
+	int s1, s2;
+	s1 = s2 = INT_MAX;
+	for(int i = 0; i < n; i++)
+	{
+		if(arr[i] < s1)
+		{
+			s2 = s1;
+			s1 = arr[i];
+		}
+		
+		else if(arr[i] < s2 && arr[i] != s1)
+		{
+			s2 = arr[i];
+		}
+	}
+		
+		if (s2 == INT_MAX)
+		{
+			cout<<"Second smallest element doesnot exist"<<endl;
+		}
+		
+		else
+		cout<< "The smallest element is "<< s1 << " and second Smallest element is " << s2 <<endl; 
+	}
+	
+
+int main(void)
+{
+	int n ;
+	cout<<"Enter Array Size"<<endl;
+	cin>> n;
+	int arr[n];
+	cout<<"Enter Element in the array "<<endl;
+	for(int i = 0; i < n; i++ )
+	{
+		cin>> arr[i];
+	}
+	
+	/* cout<<"The elements are: "<<endl;
+	for(int i = 0; i < n; i++ )
+	{
+		cout<< arr[i] ;
+	}
+	*/
+	
+	smallest_2_numbers(arr,n);
+	return 0;
+	
+}
+
+
+Q2-
+#include<iostream>
+#include<queue>
+using namespace std;
+
+void median(double arr[] , int n)
+{
+	priority_queue<double> ar1;
+	priority_queue< double, vector<double>, greater<double> > ar2;
+	
+	double mn = arr[0];
+	ar1.push(arr[0]);
+	
+	cout<<"median - " << mn << endl;
+	
+	for(int i = 1; i < n ; i++)
+	{
+		double m = arr[i];
+		
+		if(ar1.size() > ar2.size())
+		{
+			if (m < mn)
+			{
+				ar2.push(ar1.top());
+				ar1.pop();
+				ar1.push(m);
+			}
+			else
+			ar2.push(m);
+			
+			mn = (ar1.top() + ar2.top())/ 2.0;
+		 }
+		 
+		 
+		 else if( ar1.size() == ar2.size())
+		 {
+		 	if(m < mn)
+		 	{
+		 		ar1.push(m);
+		 		 mn = (double)ar1.top();
+			 }
+			 
+			 else
+			 {
+			 	ar2.push(m);
+			 	mn = (double)ar2.top();
+			 }
+		 	
+		  } 
+		  
+		  else
+		  {
+		  	
+		  	if(m > mn)
+		  	{
+		  		
+		  		ar1.push(ar2.top());
+		  		ar2.pop();
+		  		ar2.push(m);
+		    }
+		    
+		    else
+		    
+		    	ar1.push(m);
+		    
+		    mn = (ar1.top() + ar2.top()) /2.0;
+			
+			  
+		  }
+		  
+		  cout << "median - " << mn << endl;
+	}
+}
+
+int main(void)
+{
+	int n ;
+	cout<<"Enter Array Size to store the data stream"<<endl;
+	cin>> n;
+	double arr[n];
+	cout<<"Enter Element in the array "<<endl;
+	for(int i = 0; i < n; i++ )
+	{
+		cin>> arr[i];
+	}
+	
+	/* cout<<"The elements are: "<<endl;
+	for(int i = 0; i < n; i++ )
+	{
+		cout<< arr[i]<<endl ;
+	}
+	cout<<"=================";
+	*/
+	cout<<"The Median of running Integers of a data stream are: "<<endl ;
+	median(arr,n);
+	return 0;
+	
+}
